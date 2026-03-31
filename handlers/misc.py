@@ -45,8 +45,6 @@ async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             text=HELP_TEXT,
             parse_mode="Markdown",
         )
-        if update.message.chat.type != "private":
-            await update.message.reply_text("Sent you the help info in DM!", quote=True)
     except Exception:
         # Bot can't DM the user (they haven't started a private chat yet)
         await update.message.reply_text(
