@@ -370,6 +370,7 @@ deletedeadline_conv = ConversationHandler(
         DELETE_CONFIRM: [CallbackQueryHandler(deletedeadline_confirm, pattern=r"^deldl_")],
     },
     fallbacks=[CommandHandler("cancel", cancel)],
+    per_message=True,
 )
 
 editdeadline_conv = ConversationHandler(

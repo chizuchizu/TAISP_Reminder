@@ -63,7 +63,7 @@ async def webhook(request: Request):
 
 @app.get("/")
 def index():
-    return {"message": "TAISP Nerd Bot is running"}
+    return {"message": "TAISP Reminder is running"}
 
 
 # ── Vercel Cron endpoints ─────────────────────────────────────────────────────

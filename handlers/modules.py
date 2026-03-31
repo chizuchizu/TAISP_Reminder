@@ -125,4 +125,5 @@ deletemodule_conv = ConversationHandler(
         SELECT_DELETE: [CallbackQueryHandler(deletemodule_confirm, pattern=r"^delmod_")],
     },
     fallbacks=[CommandHandler("cancel", cancel)],
+    per_message=True,
 )
