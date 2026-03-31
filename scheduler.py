@@ -3,7 +3,6 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 from telegram.ext import Application
 from database import get_deadlines_due_within
-from jokes import get_joke
 import config
 
 logger = logging.getLogger(__name__)
@@ -25,7 +24,7 @@ async def weekly_notification_job(app: Application) -> None:
     deadlines = await get_deadlines_due_within(7)
     text = _format_notification(deadlines, "this week")
     if text is None:
-        text = f"No deadlines this week! Enjoy the peace.\n\n_{get_joke()}_"
+        text = "No deadlines this week! Enjoy the peace."
     try:
         await app.bot.send_message(
             chat_id=config.GROUP_CHAT_ID,

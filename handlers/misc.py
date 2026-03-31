@@ -1,6 +1,5 @@
 from telegram import Update
 from telegram.ext import ContextTypes
-from jokes import get_joke
 
 HELP_TEXT = """
 *TAISP Reminder* — your friendly deadline overlord
@@ -16,8 +15,6 @@ HELP_TEXT = """
 /listmodules — list all modules
 /deletemodule — remove a module
 
-*Fun*
-/joke — get an NTU/TAISP joke
 /help — show this message
 
 _Deadlines are shared across the group. Suffering is too._
@@ -45,16 +42,14 @@ async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             text=HELP_TEXT,
             parse_mode="Markdown",
         )
+        if update.message.chat.type != "private":
+            pass
     except Exception:
         # Bot can't DM the user (they haven't started a private chat yet)
         await update.message.reply_text(
             "I couldn't DM you — please send me a private message first, then try /help again.",
             quote=True,
         )
-
-
-async def joke(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text(get_joke())
 
 
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:

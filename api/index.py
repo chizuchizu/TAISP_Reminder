@@ -10,7 +10,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler
 
 import config
 from database import init_db
-from handlers.misc import start, help_cmd, joke, error_handler
+from handlers.misc import start, help_cmd, error_handler
 from handlers.list_cmd import list_deadlines
 from handlers.modules import addmodule_conv, deletemodule_conv, listmodules
 from handlers.deadlines import adddeadline_conv, editdeadline_conv, deletedeadline_conv
@@ -38,7 +38,6 @@ async def _get_ptb_app():
         # Simple command handlers
         _ptb_app.add_handler(CommandHandler("list", list_deadlines))
         _ptb_app.add_handler(CommandHandler("listmodules", listmodules))
-        _ptb_app.add_handler(CommandHandler("joke", joke))
         _ptb_app.add_handler(CommandHandler("help", help_cmd))
         _ptb_app.add_handler(CommandHandler("start", start))
 
