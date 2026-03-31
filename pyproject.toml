@@ -4,10 +4,12 @@ version = "0.1.0"
 description = "Telegram bot for NTU TAISP students to track assignment deadlines"
 requires-python = ">=3.11"
 dependencies = [
-    "aiosqlite>=0.22.1",
+    "asyncpg>=0.30.0",
     "apscheduler>=3.10.0",
+    "fastapi>=0.115.0",
     "python-dotenv>=1.2.2",
-    "python-telegram-bot[job-queue]>=20.0",
+    "python-telegram-bot>=20.0",
+    "uvicorn>=0.34.0",
 ]
 
 [project.scripts]
