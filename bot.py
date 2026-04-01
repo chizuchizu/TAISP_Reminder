@@ -5,6 +5,7 @@ import config
 from database import init_db
 from scheduler import setup_scheduler
 from handlers.misc import start, help_cmd, error_handler
+from handlers.debug import debug_digest
 from handlers.list_cmd import list_deadlines
 from handlers.modules import addmodule_conv, deletemodule_conv, listmodules
 from handlers.deadlines import adddeadline_conv, editdeadline_conv, deletedeadline_conv
@@ -43,6 +44,8 @@ def main() -> None:
     application.add_handler(CommandHandler("listmodules", listmodules))
     application.add_handler(CommandHandler("help", help_cmd))
     application.add_handler(CommandHandler("start", start))
+
+    application.add_handler(CommandHandler("debugdigest", debug_digest))
 
     application.add_error_handler(error_handler)
 

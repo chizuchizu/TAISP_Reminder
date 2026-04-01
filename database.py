@@ -122,6 +122,23 @@ async def get_all_deadlines() -> list[Deadline]:
     return [_row_to_deadline(r) for r in rows]
 
 
+async def get_upcoming_deadlines() -> list[Deadline]:
+    """Returns all deadlines from today onwards, ordered by due date."""
+    conn = await _conn()
+    try:
+        rows = await conn.fetch("""
+            SELECT d.id, d.module_id, m.name AS module_name, d.title,
+                   d.due_date, d.due_time, d.notes, d.created_by
+            FROM deadlines d
+            JOIN modules m ON m.id = d.module_id
+            WHERE d.due_date >= (NOW() AT TIME ZONE 'Asia/Singapore')::DATE
+            ORDER BY d.due_date, d.due_time
+        """)
+    finally:
+        await conn.close()
+    return [_row_to_deadline(r) for r in rows]
+
+
 async def get_deadlines_due_within(days: int) -> list[Deadline]:
     """Returns deadlines due from today up to `days` days ahead (SGT date logic)."""
     conn = await _conn()
